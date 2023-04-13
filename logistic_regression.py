@@ -3,6 +3,12 @@ import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 
 
+def sigmoid_function(x, weight):
+    # wyznaczanie wartości funkcji sigmoidalnej
+    z = np.dot(x, weight)
+    return 1 / (1 + np.exp(-z))
+
+
 class LogisticRegression(BaseEstimator, ClassifierMixin):
 
     def __init__(self, learning_rate, iterations):
@@ -12,15 +18,12 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
         self.features = None  # inicjalizacja liczby cech
         self.samples = None  # inicjalizacja liczby próbek
 
-
     def fit(self, x, y):
         self.samples, self.features = x.shape
         self.weight = np.zeros(self.features)
 
         for i in range(self.iterations):
-            # wyznaczanie wartości funkcji sigmoidalnej
-            z = np.dot(x, self.weight)
-            sigmoid = 1 / (1 + np.exp(-z))
+            sigmoid = sigmoid_function(x, self.weight)
             # wyznaczanie gradientu prostego
             gradient_descent = np.dot(x.T, sigmoid - y) / self.samples
             # aktualizacja wag metodą gradientu prostego
@@ -28,8 +31,7 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
         return self
 
     def predict(self, x):
-        z = np.dot(x, self.weight)
-        sigmoid = 1 / (1 + np.exp(-z))
+        sigmoid = sigmoid_function(x, self.weight)
         labels = []
         # przypisanie 1 dla wartości funkcji sigmoidalnej większych niż 0.5 oraz 0 dla pozostałych
         for i in sigmoid:
