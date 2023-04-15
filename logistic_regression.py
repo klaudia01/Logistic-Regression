@@ -33,7 +33,7 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
     def predict(self, x):
         sigmoid = sigmoid_function(x, self.weight)
         labels = []
-        # przypisanie 1 dla wartości funkcji sigmoidalnej większych niż 0.5 oraz 0 dla pozostałych
+        # przypisanie 1, kiedy wartość funkcji sigmoidalnej jest większa niż 0.5 oraz 0 w pozostałych przypadkach
         for i in sigmoid:
             if i > 0.5:
                 labels.append(1)
