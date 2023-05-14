@@ -113,7 +113,7 @@ mean_recall_PCA = np.round(np.mean(scores_3), 3)
 # zapisanie wyników do pilku
 np.savez('PCA_results.npz', scores, scores_2, scores_3)
 
-# inicjalizacja KBest
+# inicjalizacja algorytmu KBest
 KBest = SelectKBest(k=int(np.sqrt(X.shape[1])))
 
 for i, (train, test) in enumerate(rskf.split(X, y)):
@@ -193,8 +193,7 @@ mean_scores = np.round(np.mean(scores, axis=0), 3)
 mean_scores_2 = np.round(np.mean(scores_2, axis=0), 3)
 mean_scores_3 = np.round(np.mean(scores_3, axis=0), 3)
 
-# zapisanie wyników do pilku
-np.savez('reference_methods_results.npz', scores, scores_2, scores_3)
+
 
 # wyświetlanie wyników
 df = pd.DataFrame({'Klasyfikator': ['LR', 'DT', 'GaussianNB', 'KNN', 'RL SKlearn'],
@@ -204,3 +203,6 @@ df = pd.DataFrame({'Klasyfikator': ['LR', 'DT', 'GaussianNB', 'KNN', 'RL SKlearn
                    'Czułość': [mean_scores_3[0], mean_scores_3[1], mean_scores_3[2], mean_scores_3[3],
                                mean_scores_3[4]]})
 print(df)
+
+# zapisanie wyników do pilku
+np.savez('reference_methods_results.npz', scores, scores_2, scores_3)
