@@ -2,31 +2,31 @@
 import numpy as np
 import pandas as pd
 from sklearn.base import clone
-from sklearn.datasets import make_classification
+from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.linear_model import LogisticRegression as LogisticRegressionSklearn
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
-from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from scipy.stats import ttest_rel
 
 from logistic_regression import LogisticRegression
+from data_generator import DataGenerator
 
-X, y = make_classification(
-    n_samples=1000,
-    n_features=15,
-    n_informative=5,
-    n_classes=2,
-    weights=[0.9, 0.1],
-    random_state=42
-)
-# zapisanie wygenerowanych danych syntetycznych do pliku CSV
-dataset = np.concatenate((X, y[:, None]), axis=1)
-np.savetxt('dataset.csv', dataset, delimiter=',')
+# wczytywanie danych
+data = 'dataset.csv'
+try:
+    data = np.genfromtxt(data, delimiter=',')
+except FileNotFoundError:
+    DataGenerator.data_generator()
+    data = np.genfromtxt(data, delimiter=',')
+
+X = data[:, :-1]
+y = data[:, -1].astype(int)
 
 # inicjalizacja walidacji krzyżowej
 rskf = RepeatedStratifiedKFold(n_splits=2, n_repeats=5, random_state=42)
@@ -207,3 +207,4 @@ print(df)
 
 # zapisanie wyników do pilku
 np.savez('reference_methods_results.npz', scores, scores_2, scores_3)
+np.save('classifiers_accuracy.npy', scores)
