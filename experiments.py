@@ -34,7 +34,7 @@ rskf = RepeatedStratifiedKFold(n_splits=2, n_repeats=5, random_state=42)
 # Eksperyment 1: Znalezienie optymalnego hiperparametru liczby iteracji
 
 # inicjalizacja listy możliwych wartości liczby iteracji
-iterations_list = [100, 200, 500, 1000, 2000, 5000, 10000]
+iterations_list = [5, 10, 15, 20, 50, 100, 200]
 
 # inicjalizacja macierzy wyników
 scores = np.zeros((10, 7))
@@ -83,7 +83,7 @@ for i, (train, test) in enumerate(rskf.split(X, y)):
     X_train, X_test = X[train_index], X[test_index]
     y_train, y_test = y[train_index], y[test_index]
 
-    # trenowanie algorytmu KBest
+    # trenowanie algorytmu PCA
     pca.fit(X_train)
     # transformacja danych treningowych i testowych
     X_train = pca.transform(X_train)
@@ -123,6 +123,9 @@ for i, (train, test) in enumerate(rskf.split(X, y)):
 
     # trenowanie algorytmu KBest
     KBest.fit(X_train, y_train)
+    # transformacja danych treningowych i testowych
+    X_train = KBest.transform(X_train)
+    X_test = KBest.transform(X_test)
 
     # inicjalizacja modelu regresji logistycznej
     lg = LogisticRegression(learning_rate=0.01, iterations=optimal_iterations)
@@ -192,8 +195,6 @@ for i, (train_index, test_index) in enumerate(rskf.split(X, y)):
 mean_scores = np.round(np.mean(scores, axis=0), 3)
 mean_scores_2 = np.round(np.mean(scores_2, axis=0), 3)
 mean_scores_3 = np.round(np.mean(scores_3, axis=0), 3)
-
-
 
 # wyświetlanie wyników
 df = pd.DataFrame({'Klasyfikator': ['LR', 'DT', 'GaussianNB', 'KNN', 'RL SKlearn'],
