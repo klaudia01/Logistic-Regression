@@ -1,21 +1,28 @@
 # Regresja logistyczna
 ## Struktura plików
-**logistic_regression.py** - implementacja algorytmu regresji logistycznej
+**[main.py]()** - główny plik wykonywalny
 
-**experiments.py** - implementacja trzech eksperymentów: 
-* Eksperyment 1: Znalezienie optymalnego hiperparametru liczby iteracji
-* Eksperyment 2: Ekstrakcja (PCA) i selekcja (KBest) cech
-* Eksperyment 3: Porównanie do metod referencyjnych (drzewo decyzyjne, naiwny klasyfikator bayesowski, K najbliższych 
+**[logistic_regression.py]()** - implementacja algorytmu regresji logistycznej
+
+**[experiments.py]()** -  wywołanie eksperymentów oraz prezentacja ich wyników
+
+**[statistical_tests.py]()** -  wywołanie testów ststystycznych oraz prezentacja ich wyników
+
+**[n_iterations.py]()** - implementacja eksperymentu polegającego na znalezieniu optymalnego hiperparametru liczby iteracji
+
+**[pca.py]()** - implementacja eksperymentu ekstrakcji cech
+
+**[kbest.py]()** - implementacja eksperymentu selekcji cech
+
+**[reference_methods.py]()** - implementacja eksperymentu porównania do metod referencyjnych (drzewo decyzyjne, naiwny klasyfikator bayesowski, K najbliższych
 sąsiadów oraz implementacja regresji logistycznej w bibliotece Scikit-learn)
 
-**dataset.csv** - plik CSV zawierający wygenerowane dane syntetyczne
+**[t_test.py]()** -  implementacja testu T-studenta
 
-**n_iterations_results.npy** - plik zwierający wyniki eksperymentu 1
+**[t_test.py]()** -  implementacja testu rankingowego - Wilcoxon signed rank
 
-**PCA_results.npz** - plik zwierający wyniki ekstrakcji cech (PCA) z eksperymentu 2
+**[dataset.csv]()** - plik CSV zawierający wygenerowane dane syntetyczne
 
-**PCA_results.npz** - plik zwierający wyniki selekcji cech (KBest) z eksperymentu 3
 
-**reference_methods_results.npz** - plik zwierający wyniki eksperymentu 3
 ## Uruchomienie
-Uruchomienie eksperymentu jest możliwe poprzez włączenie skryptu **experiments.py**.
+Uruchomienie eksperymentu jest możliwe poprzez włączenie skryptu **[main.py]()**.
