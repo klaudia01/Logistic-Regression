@@ -1,4 +1,3 @@
-# Klaudia Barabasz 259046
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 
