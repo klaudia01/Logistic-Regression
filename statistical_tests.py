@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 
-from wilcoxon_signed_rank_test import wilcoxon_test
 from t_test import t_test
 
 
@@ -22,12 +21,3 @@ def statistical_tests():
     df = pd.DataFrame(results, columns=clfs, index=clfs)
     print('Czy klasyfikator osiągnął statystycznie lepsze wyniki:\n', df, '\n')
 
-    # ----Test rankingowy - Wilcoxon signed rank----
-    w_stat, results = wilcoxon_test(scores, n_clfs, alpha)  # wywołanie testu
-
-    # wyświetlanie wyników
-    df = pd.DataFrame(w_stat, columns=clfs, index=clfs)
-    print('Wartości statystki:\n', df, '\n')
-
-    df = pd.DataFrame(results, columns=clfs, index=clfs)
-    print('Czy klasyfikator osiągnął statystycznie lepsze wyniki:\n', df, '\n')

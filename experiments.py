@@ -80,7 +80,7 @@ def experiments():
     plt.plot(n_features, mean_scores)
     plt.xlabel('Liczba zachowanych cech')
     plt.ylabel('Dokładność')
-    plt.title('Wykres zależności dokładności od liczby zachowanych cech')
+    plt.title('Wykres zależności dokładności od ekstrakcji cech')
     plt.show()
 
     # wywołanie eksperymentu
@@ -106,7 +106,7 @@ def experiments():
     plt.plot(n_features, mean_scores)
     plt.xlabel('Liczba wybranych cech')
     plt.ylabel('Dokładność')
-    plt.title('Wykres zależności dokładności od liczby wybranych cech')
+    plt.title('Wykres zależności dokładności od selekcji cech')
     plt.show()
 
     # ----Eksperyment 3: Porównanie do metod referencyjnych----
